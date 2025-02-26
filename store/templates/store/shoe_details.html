@@ -1,0 +1,17 @@
+{% extends 'store/base.html' %} {% block content %}
+<div class="shoe-detail">
+  <h1>{{ shoe.name }}</h1>
+  <img src="{{ shoe.image.url }}" alt="{{ shoe.name }}" width="200" />
+  <p>Category: {{ shoe.category }}</p>
+  <p>Price: ${{ shoe.price }}</p>
+  <p>Stock: {{ shoe.stock }}</p>
+  <p>{{ shoe.description }}</p>
+
+  <a href="{% url 'update_shoe' shoe.id %}">Edit</a>
+  <a href="{% url 'delete_shoe' shoe.id %}">Delete</a>
+  <form action="{% url 'cart_add' shoe.id %}" method="POST">
+    {% csrf_token %}
+    <button type="submit" class="btn btn-primary">Add to Cart</button>
+  </form>
+</div>
+{% endblock %}

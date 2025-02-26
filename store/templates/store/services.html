@@ -1,0 +1,268 @@
+{% extends 'store/base.html' %} {% load static %} {% block content %}
+<div class="services-container">
+  <div class="content-wrapper">
+    <div class="container my-5">
+      <div class="welcome-section">
+        <h2 class="text-center mb-4 main-title">Our Services</h2>
+        <div class="welcome-underline"></div>
+      </div>
+
+      <div class="services-grid">
+        <!-- Free Shipping Service -->
+        <div class="service-card">
+          <div class="service-icon">
+            <i class="fas fa-shipping-fast"></i>
+          </div>
+          <h3>Free Shipping</h3>
+          <p>
+            Enjoy free shipping on all orders over ₹500. We ensure quick and
+            reliable delivery to your doorstep.
+          </p>
+          <ul class="service-features">
+            <li><i class="fas fa-check"></i> Fast delivery within 3-5 days</li>
+            <li><i class="fas fa-check"></i> Real-time tracking</li>
+            <li><i class="fas fa-check"></i> Secure packaging</li>
+          </ul>
+        </div>
+
+        <!-- Return Policy Service -->
+        <div class="service-card">
+          <div class="service-icon">
+            <i class="fas fa-undo"></i>
+          </div>
+          <h3>30-Day Returns</h3>
+          <p>
+            Not satisfied with your purchase? Return it within 30 days for a
+            full refund or exchange.
+          </p>
+          <ul class="service-features">
+            <li><i class="fas fa-check"></i> Hassle-free returns</li>
+            <li><i class="fas fa-check"></i> No questions asked</li>
+            <li><i class="fas fa-check"></i> Quick refund process</li>
+          </ul>
+        </div>
+
+        <!-- Customer Support Service -->
+        <div class="service-card">
+          <div class="service-icon">
+            <i class="fas fa-headset"></i>
+          </div>
+          <h3>24/7 Support</h3>
+          <p>
+            Our dedicated customer service team is available round the clock to
+            assist you with any queries.
+          </p>
+          <ul class="service-features">
+            <li><i class="fas fa-check"></i> Live chat support</li>
+            <li><i class="fas fa-check"></i> Phone assistance</li>
+            <li><i class="fas fa-check"></i> Email support</li>
+          </ul>
+        </div>
+
+        <!-- Secure Payment Service -->
+        <div class="service-card">
+          <div class="service-icon">
+            <i class="fas fa-lock"></i>
+          </div>
+          <h3>Secure Payments</h3>
+          <p>
+            Shop with confidence using our secure payment gateway with multiple
+            payment options.
+          </p>
+          <ul class="service-features">
+            <li><i class="fas fa-check"></i> SSL encryption</li>
+            <li><i class="fas fa-check"></i> Multiple payment methods</li>
+            <li><i class="fas fa-check"></i> Fraud protection</li>
+          </ul>
+        </div>
+
+        <!-- Size Exchange Service -->
+        <div class="service-card">
+          <div class="service-icon">
+            <i class="fas fa-sync"></i>
+          </div>
+          <h3>Size Exchange</h3>
+          <p>
+            Got the wrong size? Exchange it for free within 7 days of delivery.
+          </p>
+          <ul class="service-features">
+            <li><i class="fas fa-check"></i> Free size exchanges</li>
+            <li><i class="fas fa-check"></i> Quick processing</li>
+            <li><i class="fas fa-check"></i> Available nationwide</li>
+          </ul>
+        </div>
+
+        <!-- Premium Quality Service -->
+        <div class="service-card">
+          <div class="service-icon">
+            <i class="fas fa-award"></i>
+          </div>
+          <h3>Quality Guarantee</h3>
+          <p>We ensure all our products meet the highest quality standards.</p>
+          <ul class="service-features">
+            <li><i class="fas fa-check"></i> Quality inspection</li>
+            <li><i class="fas fa-check"></i> Authentic products</li>
+            <li><i class="fas fa-check"></i> Warranty included</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<style>
+  .services-container {
+    background-color: #e3f2fd; /* Light blue background */
+    min-height: 100vh;
+    position: relative;
+  }
+
+  .content-wrapper {
+    background-color: rgba(
+      241,
+      247,
+      252,
+      0.95
+    ); /* Lighter blue transparent background */
+    padding: 2rem 0;
+    min-height: 100vh;
+  }
+
+  .welcome-section {
+    text-align: center;
+    position: sticky;
+    top: 60px;
+    background-color: rgba(
+      241,
+      247,
+      252,
+      0.95
+    ); /* Matching light blue for sticky header */
+    padding: 1rem 0;
+    z-index: 10;
+    margin-bottom: 2rem;
+  }
+
+  .main-title {
+    font-size: 2.5rem;
+    color: #2c3e50;
+    margin-bottom: 1rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+  }
+
+  .welcome-underline {
+    width: 100px;
+    height: 4px;
+    background: linear-gradient(
+      45deg,
+      #2193b0,
+      #6dd5ed
+    ); /* Keeping the existing gradient */
+    margin: 0 auto;
+    border-radius: 2px;
+  }
+
+  .services-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(250px, 1fr));
+    gap: 1.5rem;
+    padding: 0 1rem;
+    max-width: 1200px;
+    margin: 0 auto;
+    margin-left: 20px;
+  }
+
+  .service-card {
+    background: white;
+    border-radius: 15px;
+    padding: 1.5rem;
+    text-align: center;
+    box-shadow: 0 5px 15px rgba(33, 147, 176, 0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    margin-right: 40px;
+    min-height: 320px;
+  }
+
+  .service-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 25px rgba(33, 147, 176, 0.2); /* Enhanced blue shadow on hover */
+  }
+
+  .service-icon {
+    font-size: 2rem;
+    color: #2193b0;
+    margin-bottom: 1rem;
+  }
+
+  .service-card h3 {
+    color: #2c3e50;
+    font-size: 1.3rem;
+    margin-bottom: 0.8rem;
+  }
+
+  .service-card p {
+    color: #666;
+    margin-bottom: 1rem;
+    line-height: 1.4;
+    font-size: 0.9rem;
+  }
+
+  .service-features {
+    list-style: none;
+    padding: 0;
+    text-align: left;
+  }
+
+  .service-features li {
+    margin-bottom: 0.6rem;
+    color: #555;
+    display: flex;
+    align-items: center;
+    font-size: 0.9rem;
+  }
+
+  .service-features li i {
+    color: #2193b0;
+    margin-right: 0.5rem;
+    font-size: 0.8rem;
+  }
+
+  @media (max-width: 1200px) {
+    .services-grid {
+      grid-template-columns: repeat(2, minmax(250px, 1fr));
+      margin-left: 15px;
+      margin-right: 15px;
+    }
+  }
+
+  @media (max-width: 768px) {
+    .services-grid {
+      grid-template-columns: 1fr;
+      margin-left: 10px;
+      margin-right: 10px;
+    }
+
+    .welcome-section {
+      top: 50px;
+      background-color: rgba(
+        241,
+        247,
+        252,
+        0.95
+      ); /* Consistent light blue on mobile */
+    }
+
+    .service-card {
+      margin-right: 10px;
+      min-height: auto;
+      padding: 1.2rem;
+    }
+
+    .main-title {
+      font-size: 2rem;
+    }
+  }
+</style>
+{% endblock %}

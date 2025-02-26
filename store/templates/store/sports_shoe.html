@@ -1,0 +1,222 @@
+{% extends "store/base.html" %} {% load static %} {% block content %}
+<div class="sports-shoe-container">
+  <div class="content-wrapper">
+    <div class="container my-5">
+      <div class="section-header">
+        <h2 class="text-center mb-4 main-title">Sports Shoes Collection</h2>
+        <div class="title-underline"></div>
+      </div>
+
+      <div class="row">
+        {% for shoe in sports_shoes %}
+        <div class="col-md-4 mb-4">
+          <div class="product-card">
+            <div class="product-image-wrapper">
+              <img
+                src="{{ shoe.image.url }}"
+                class="product-image"
+                alt="{{ shoe.name }}"
+              />
+              <div class="hover-overlay"></div>
+            </div>
+            <div class="product-content">
+              <h5 class="product-title">{{ shoe.name }}</h5>
+              <p class="product-description">{{ shoe.description }}</p>
+              <ul class="product-details">
+                <li><i class="fas fa-tag"></i> {{ shoe.category.name }}</li>
+                <li>
+                  <i class="fas fa-box"></i> {{ shoe.stock }} pairs available
+                </li>
+                <li><i class="fas fa-euro-sign"></i> {{ shoe.price }}</li>
+              </ul>
+              <div class="button-group">
+                <a href="{% url 'shoe_detail' shoe.id %}" class="btn-view">
+                  <i class="fas fa-eye"></i> View Details
+                </a>
+                {% if user.is_authenticated %}
+                <a href="{% url 'cart_add' shoe.id %}" class="btn-cart">
+                  <i class="fas fa-shopping-cart"></i> Add to Cart
+                </a>
+                {% endif %}
+              </div>
+            </div>
+          </div>
+        </div>
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+</div>
+
+<style>
+  .sports-shoe-container {
+    background-color: #f8f9fa;
+    min-height: 100vh;
+  }
+
+  .content-wrapper {
+    padding: 3rem 0;
+    position: relative;
+  }
+
+  .section-header {
+    text-align: center;
+    margin-bottom: 3rem;
+  }
+
+  .main-title {
+    font-size: 2.5rem;
+    color: #2c3e50;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+  }
+
+  .title-underline {
+    width: 100px;
+    height: 4px;
+    background: linear-gradient(45deg, #2193b0, #6dd5ed);
+    margin: 0 auto;
+    border-radius: 2px;
+  }
+
+  .row {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 1.5rem;
+  }
+
+  .col-md-4 {
+    flex: 0 0 320px;
+    max-width: 320px;
+    padding: 0;
+  }
+
+  .product-card {
+    background: white;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+    height: 100%;
+    animation: fadeIn 0.6s ease-out forwards;
+  }
+
+  .product-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+  }
+
+  .product-image-wrapper {
+    position: relative;
+    height: 240px;
+    overflow: hidden;
+  }
+
+  .product-image {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    padding: 15px;
+    transition: transform 0.5s ease;
+  }
+
+  .hover-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(
+      rgba(33, 147, 176, 0.3),
+      rgba(109, 213, 237, 0.3)
+    );
+    opacity: 0;
+    transition: opacity 0.3s ease;
+  }
+
+  .product-card:hover .product-image {
+    transform: scale(1.1);
+  }
+
+  .product-card:hover .hover-overlay {
+    opacity: 1;
+  }
+
+  .product-content {
+    padding: 1.5rem;
+  }
+
+  .product-title {
+    font-size: 1.2rem;
+    color: #2c3e50;
+    margin-bottom: 0.5rem;
+  }
+
+  .product-description {
+    font-size: 0.9rem;
+    color: #7f8c8d;
+    margin-bottom: 1rem;
+  }
+
+  .product-details {
+    list-style: none;
+    padding: 0;
+    margin-bottom: 1rem;
+  }
+
+  .product-details li {
+    font-size: 0.9rem;
+    margin-bottom: 0.4rem;
+    color: #34495e;
+  }
+
+  .product-details i {
+    width: 15px;
+    margin-right: 0.5rem;
+    color: #2193b0;
+  }
+
+  .button-group {
+    display: flex;
+    gap: 0.5rem;
+  }
+
+  .btn-view,
+  .btn-cart {
+    padding: 0.6rem 1rem;
+    font-size: 0.9rem;
+    border-radius: 20px;
+    text-decoration: none;
+    transition: all 0.3s ease;
+  }
+
+  .btn-view {
+    background-color: #2193b0;
+    color: white;
+  }
+
+  .btn-cart {
+    background-color: #6dd5ed;
+    color: white;
+  }
+
+  .btn-view:hover,
+  .btn-cart:hover {
+    opacity: 0.9;
+    transform: translateY(-2px);
+  }
+
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+</style>
+{% endblock %}

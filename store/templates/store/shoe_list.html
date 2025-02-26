@@ -1,0 +1,295 @@
+{% extends 'store/base.html' %} {% block content %}
+<div class="shoe-grid">
+  {% for shoe in shoes %}
+  <div class="shoe-card">
+    <div class="shoe-image">
+      <img
+        src="{{ shoe.image.url }}"
+        alt="{{ shoe.name }}"
+        class="shoe-thumbnail"
+      />
+    </div>
+    <div class="shoe-details">
+      <h2 class="shoe-name">
+        <a href="{% url 'shoe_detail' shoe.id %}">{{ shoe.name }}</a>
+      </h2>
+      <div class="shoe-info">
+        <p class="shoe-price">${{ shoe.price }}</p>
+        <p class="shoe-stock {% if shoe.stock < 5 %}low-stock{% endif %}">
+          Stock: {{ shoe.stock }}
+        </p>
+      </div>
+      <form
+        action="{% url 'cart_add' shoe.id %}"
+        method="POST"
+        class="add-to-cart-form"
+      >
+        {% csrf_token %}
+        <button type="submit" class="add-to-cart-btn">
+          <div class="button-content">
+            <i class="fas fa-shopping-cart"></i>
+            <span>Add to Cart</span>
+          </div>
+          <div class="cart-btn-overlay"></div>
+          <div class="ripple-effect"></div>
+        </button>
+      </form>
+    </div>
+  </div>
+  {% endfor %}
+</div>
+
+<style>
+  .shoe-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 2rem;
+    padding: 2rem;
+    background: linear-gradient(to bottom, #f8f9fa, #ffffff);
+  }
+
+  .shoe-card {
+    background: white;
+    border-radius: 15px;
+    overflow: hidden;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    position: relative;
+    border: 1px solid rgba(0, 0, 0, 0.05);
+    display: flex;
+    flex-direction: column;
+  }
+
+  .shoe-card:hover {
+    transform: translateY(-8px) scale(1.02);
+    box-shadow: 0 15px 30px rgba(33, 147, 176, 0.2);
+  }
+
+  .shoe-image {
+    position: relative;
+    height: 220px;
+    overflow: hidden;
+    background: linear-gradient(45deg, #f8f9fa, #ffffff);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .shoe-thumbnail {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    transition: transform 0.5s ease;
+    filter: drop-shadow(0 5px 10px rgba(0, 0, 0, 0.1));
+    padding: 1rem;
+  }
+
+  .shoe-card:hover .shoe-thumbnail {
+    transform: scale(1.12) rotate(2deg);
+  }
+
+  .shoe-details {
+    padding: 1.2rem;
+    background: linear-gradient(to bottom, #ffffff, #f8f9fa);
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 0.8rem;
+  }
+
+  .shoe-name {
+    margin: 0;
+    font-size: 1.2rem;
+    position: relative;
+    padding-left: 0.8rem;
+  }
+
+  .shoe-name::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 50%;
+    height: 70%;
+    width: 3px;
+    background: linear-gradient(45deg, #2193b0, #6dd5ed);
+    transform: translateY(-50%);
+    border-radius: 2px;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+  }
+
+  .shoe-card:hover .shoe-name::before {
+    opacity: 1;
+  }
+
+  .shoe-name a {
+    color: #2c3e50;
+    text-decoration: none;
+    transition: color 0.3s ease;
+  }
+
+  .shoe-name a:hover {
+    color: #2193b0;
+  }
+
+  .shoe-info {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.5rem;
+    background: rgba(248, 249, 250, 0.5);
+    border-radius: 10px;
+    backdrop-filter: blur(5px);
+  }
+
+  .shoe-price {
+    font-size: 1.2rem;
+    font-weight: bold;
+    color: #2c3e50;
+    margin: 0;
+    background: linear-gradient(45deg, #2193b0, #6dd5ed);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+
+  .shoe-stock {
+    font-size: 0.9rem;
+    color: #666;
+    margin: 0;
+    transition: color 0.3s ease;
+  }
+
+  .low-stock {
+    color: #e74c3c;
+    animation: pulse 2s infinite;
+  }
+
+  .add-to-cart-form {
+    margin-top: auto;
+  }
+
+  .add-to-cart-btn {
+    width: 100%;
+    padding: 0.8rem;
+    background: linear-gradient(45deg, #2193b0, #6dd5ed);
+    color: white;
+    border: none;
+    border-radius: 25px;
+    cursor: pointer;
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    font-size: 0.9rem;
+  }
+
+  .add-to-cart-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(33, 147, 176, 0.3);
+    letter-spacing: 2px;
+  }
+
+  /* Shimmer effect */
+  .shoe-card::after {
+    content: "";
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: linear-gradient(
+      45deg,
+      transparent,
+      rgba(255, 255, 255, 0.1),
+      transparent
+    );
+    transform: rotate(45deg);
+    animation: shimmer 3s infinite;
+    pointer-events: none;
+  }
+
+  @keyframes shimmer {
+    0% {
+      transform: rotate(45deg) translateY(-100%);
+    }
+    100% {
+      transform: rotate(45deg) translateY(100%);
+    }
+  }
+
+  @keyframes pulse {
+    0% {
+      opacity: 1;
+    }
+    50% {
+      opacity: 0.6;
+    }
+    100% {
+      opacity: 1;
+    }
+  }
+
+  /* Button ripple effect */
+  .add-to-cart-btn::after {
+    content: "";
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: -100%;
+    background: linear-gradient(
+      90deg,
+      transparent,
+      rgba(255, 255, 255, 0.2),
+      transparent
+    );
+    transition: 0.5s;
+  }
+
+  .add-to-cart-btn:hover::after {
+    left: 100%;
+  }
+
+  @media (max-width: 768px) {
+    .shoe-grid {
+      grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+      gap: 1.5rem;
+      padding: 1rem;
+    }
+
+    .shoe-name {
+      font-size: 1.1rem;
+    }
+
+    .shoe-details {
+      padding: 1rem;
+    }
+  }
+</style>
+
+<script>
+  document.querySelectorAll(".add-to-cart-btn").forEach((button) => {
+    button.addEventListener("click", function (e) {
+      let x = e.clientX - e.target.getBoundingClientRect().left;
+      let y = e.clientY - e.target.getBoundingClientRect().top;
+
+      let ripple = document.createElement("div");
+      ripple.classList.add("ripple-effect");
+      ripple.style.left = `${x}px`;
+      ripple.style.top = `${y}px`;
+
+      this.appendChild(ripple);
+
+      setTimeout(() => {
+        ripple.remove();
+      }, 600);
+    });
+  });
+</script>
+{% endblock %}

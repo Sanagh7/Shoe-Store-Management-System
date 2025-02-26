@@ -1,0 +1,179 @@
+{% extends 'store/base.html' %} {% block content %}
+<div
+  style="
+    max-width: 400px;
+    margin: 80px auto;
+    padding: 25px;
+    background: #e6f3ff;
+    border-radius: 15px;
+    box-shadow: 0 10px 30px rgba(33, 147, 176, 0.2);
+  "
+>
+  <h2
+    style="
+      text-align: center;
+      margin-bottom: 25px;
+      color: #2193b0;
+      font-size: 1.8rem;
+      font-weight: 600;
+    "
+  >
+    Register New Account
+  </h2>
+
+  {% if messages %} {% for message in messages %}
+  <div
+    style="color: {% if message.tags == 'error' %}#e74c3c{% else %}#27ae60{% endif %}; 
+                  padding: 12px; 
+                  margin-bottom: 15px;
+                  border-radius: 8px;
+                  background-color: {% if message.tags == 'error' %}#fdeaea{% else %}#eafaf1{% endif %};
+                  border-left: 4px solid {% if message.tags == 'error' %}#e74c3c{% else %}#27ae60{% endif %};
+                  animation: slideIn 0.3s ease-out;"
+  >
+    {{ message }}
+  </div>
+  {% endfor %} {% endif %}
+
+  <form method="POST">
+    {% csrf_token %}
+    <div style="margin-bottom: 20px">
+      <label for="username" style="font-weight: 500; color: #34495e"
+        >Username:</label
+      >
+      <input
+        type="text"
+        name="username"
+        id="username"
+        required
+        style="
+          width: 100%;
+          padding: 10px;
+          margin-top: 6px;
+          border: 2px solid #e0e0e0;
+          border-radius: 8px;
+          transition: all 0.3s ease;
+          background: rgba(255, 255, 255, 0.9);
+        "
+        onFocus="this.style.borderColor='#2193b0'; this.style.boxShadow='0 0 10px rgba(33, 147, 176, 0.2)'"
+        onBlur="this.style.borderColor='#e0e0e0'; this.style.boxShadow='none'"
+      />
+    </div>
+    <div style="margin-bottom: 20px">
+      <label for="email" style="font-weight: 500; color: #34495e">Email:</label>
+      <input
+        type="email"
+        name="email"
+        id="email"
+        required
+        style="
+          width: 100%;
+          padding: 10px;
+          margin-top: 6px;
+          border: 2px solid #e0e0e0;
+          border-radius: 8px;
+          transition: all 0.3s ease;
+          background: rgba(255, 255, 255, 0.9);
+        "
+        onFocus="this.style.borderColor='#2193b0'; this.style.boxShadow='0 0 10px rgba(33, 147, 176, 0.2)'"
+        onBlur="this.style.borderColor='#e0e0e0'; this.style.boxShadow='none'"
+      />
+    </div>
+    <div style="margin-bottom: 20px">
+      <label for="password1" style="font-weight: 500; color: #34495e"
+        >Password:</label
+      >
+      <input
+        type="password"
+        name="password1"
+        id="password1"
+        required
+        style="
+          width: 100%;
+          padding: 10px;
+          margin-top: 6px;
+          border: 2px solid #e0e0e0;
+          border-radius: 8px;
+          transition: all 0.3s ease;
+          background: rgba(255, 255, 255, 0.9);
+        "
+        onFocus="this.style.borderColor='#2193b0'; this.style.boxShadow='0 0 10px rgba(33, 147, 176, 0.2)'"
+        onBlur="this.style.borderColor='#e0e0e0'; this.style.boxShadow='none'"
+      />
+    </div>
+    <div style="margin-bottom: 20px">
+      <label for="password2" style="font-weight: 500; color: #34495e"
+        >Confirm Password:</label
+      >
+      <input
+        type="password"
+        name="password2"
+        id="password2"
+        required
+        style="
+          width: 100%;
+          padding: 10px;
+          margin-top: 6px;
+          border: 2px solid #e0e0e0;
+          border-radius: 8px;
+          transition: all 0.3s ease;
+          background: rgba(255, 255, 255, 0.9);
+        "
+        onFocus="this.style.borderColor='#2193b0'; this.style.boxShadow='0 0 10px rgba(33, 147, 176, 0.2)'"
+        onBlur="this.style.borderColor='#e0e0e0'; this.style.boxShadow='none'"
+      />
+    </div>
+    <button
+      type="submit"
+      style="
+        width: 100%;
+        background: linear-gradient(45deg, #2193b0, #6dd5ed);
+        color: white;
+        padding: 12px;
+        border: none;
+        border-radius: 8px;
+        cursor: pointer;
+        font-size: 15px;
+        font-weight: 600;
+        transition: all 0.3s ease;
+        box-shadow: 0 4px 15px rgba(33, 147, 176, 0.3);
+        position: relative;
+        overflow: hidden;
+      "
+      onmouseover="this.style.transform='translateY(-2px)'; this.style.boxShadow='0 6px 20px rgba(33, 147, 176, 0.4)'"
+      onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 4px 15px rgba(33, 147, 176, 0.3)'"
+    >
+      <span style="position: relative; z-index: 1">Register</span>
+    </button>
+  </form>
+
+  <div style="text-align: center; margin-top: 25px; color: #7f8c8d">
+    Already have an account?
+    <a
+      href="{% url 'login' %}"
+      style="
+        color: #2193b0;
+        text-decoration: none;
+        font-weight: 500;
+        transition: color 0.3s;
+      "
+      onmouseover="this.style.color='#1b7a8f'"
+      onmouseout="this.style.color='#2193b0'"
+      >Login here</a
+    >
+  </div>
+</div>
+
+<style>
+  @keyframes slideIn {
+    from {
+      opacity: 0;
+      transform: translateY(-10px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+</style>
+{% endblock %}
